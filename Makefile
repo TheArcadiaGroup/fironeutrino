@@ -1,6 +1,6 @@
-PKG := github.com/lightninglabs/neutrino
+PKG := github.com/TheArcadiaGroup/fironeutrino
 
-BTCD_PKG := github.com/btcsuite/btcd
+BTCD_PKG := github.com/TheArcadiaGroup/firod
 LINT_PKG := github.com/golangci/golangci-lint/cmd/golangci-lint
 GOACC_PKG := github.com/ory/go-acc
 GOIMPORTS_PKG := golang.org/x/tools/cmd/goimports

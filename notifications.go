@@ -9,9 +9,9 @@ package neutrino
 import (
 	"errors"
 
-	"github.com/btcsuite/btcd/addrmgr"
-	"github.com/btcsuite/btcd/connmgr"
-	"github.com/lightninglabs/neutrino/query"
+	"github.com/TheArcadiaGroup/firod/addrmgr"
+	"github.com/TheArcadiaGroup/firod/connmgr"
+	"github.com/TheArcadiaGroup/fironeutrino/query"
 )
 
 type getConnCountMsg struct {

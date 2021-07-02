@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcutil/gcs"
-	"github.com/btcsuite/btcutil/gcs/builder"
-	"github.com/btcsuite/btcwallet/walletdb"
-	_ "github.com/btcsuite/btcwallet/walletdb/bdb"
+	"github.com/TheArcadiaGroup/firod/chaincfg"
+	"github.com/TheArcadiaGroup/firod/chaincfg/chainhash"
+	"github.com/TheArcadiaGroup/firoutil/gcs"
+	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
+	"github.com/TheArcadiaGroup/firowallet/walletdb"
+	_ "github.com/TheArcadiaGroup/firowallet/walletdb/bdb"
 )
 
 func createTestDatabase() (func(), FilterDatabase, error) {

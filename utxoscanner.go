@@ -6,9 +6,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcutil"
-	"github.com/lightninglabs/neutrino/headerfs"
+	"github.com/TheArcadiaGroup/firod/chaincfg/chainhash"
+	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 )
 
 // getUtxoResult is a simple pair type holding a spend report and error.
@@ -94,7 +94,7 @@ type UtxoScannerConfig struct {
 	BlockFilterMatches func(ro *rescanOptions, blockHash *chainhash.Hash) (bool, error)
 
 	// GetBlock fetches a block from the p2p network.
-	GetBlock func(chainhash.Hash, ...QueryOption) (*btcutil.Block, error)
+	GetBlock func(chainhash.Hash, ...QueryOption) (*firoutil.Block, error)
 }
 
 // UtxoScanner batches calls to GetUtxo so that a single scan can search for

@@ -12,22 +12,22 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/btcsuite/btcd/addrmgr"
-	"github.com/btcsuite/btcd/blockchain"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/connmgr"
-	"github.com/btcsuite/btcd/peer"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcwallet/walletdb"
-	"github.com/lightninglabs/neutrino/banman"
-	"github.com/lightninglabs/neutrino/blockntfns"
-	"github.com/lightninglabs/neutrino/cache/lru"
-	"github.com/lightninglabs/neutrino/filterdb"
-	"github.com/lightninglabs/neutrino/headerfs"
-	"github.com/lightninglabs/neutrino/pushtx"
-	"github.com/lightninglabs/neutrino/query"
+	"github.com/TheArcadiaGroup/firod/addrmgr"
+	"github.com/TheArcadiaGroup/firod/blockchain"
+	"github.com/TheArcadiaGroup/firod/chaincfg"
+	"github.com/TheArcadiaGroup/firod/chaincfg/chainhash"
+	"github.com/TheArcadiaGroup/firod/connmgr"
+	"github.com/TheArcadiaGroup/firod/peer"
+	"github.com/TheArcadiaGroup/firod/wire"
+	"github.com/TheArcadiaGroup/fironeutrino/banman"
+	"github.com/TheArcadiaGroup/fironeutrino/blockntfns"
+	"github.com/TheArcadiaGroup/fironeutrino/cache/lru"
+	"github.com/TheArcadiaGroup/fironeutrino/filterdb"
+	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
+	"github.com/TheArcadiaGroup/fironeutrino/pushtx"
+	"github.com/TheArcadiaGroup/fironeutrino/query"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
+	"github.com/TheArcadiaGroup/firowallet/walletdb"
 )
 
 // These are exported variables so they can be changed by users.
@@ -297,9 +297,9 @@ func (sp *ServerPeer) OnHeaders(p *peer.Peer, msg *wire.MsgHeaders) {
 // disconnected if an invalid fee filter value is provided.
 func (sp *ServerPeer) OnFeeFilter(_ *peer.Peer, msg *wire.MsgFeeFilter) {
 	// Check that the passed minimum fee is a valid amount.
-	if msg.MinFee < 0 || msg.MinFee > btcutil.MaxSatoshi {
+	if msg.MinFee < 0 || msg.MinFee > firoutil.MaxSatoshi {
 		log.Debugf("Peer %v sent an invalid feefilter '%v' -- "+
-			"disconnecting", sp, btcutil.Amount(msg.MinFee))
+			"disconnecting", sp, firoutil.Amount(msg.MinFee))
 		sp.Disconnect()
 		return
 	}

@@ -12,19 +12,19 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/btcsuite/btcd/blockchain"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcutil/gcs"
-	"github.com/btcsuite/btcutil/gcs/builder"
-	"github.com/lightninglabs/neutrino/banman"
-	"github.com/lightninglabs/neutrino/blockntfns"
-	"github.com/lightninglabs/neutrino/chainsync"
-	"github.com/lightninglabs/neutrino/headerfs"
-	"github.com/lightninglabs/neutrino/headerlist"
-	"github.com/lightninglabs/neutrino/query"
+	"github.com/TheArcadiaGroup/firod/blockchain"
+	"github.com/TheArcadiaGroup/firod/chaincfg"
+	"github.com/TheArcadiaGroup/firod/chaincfg/chainhash"
+	"github.com/TheArcadiaGroup/firod/wire"
+	"github.com/TheArcadiaGroup/fironeutrino/banman"
+	"github.com/TheArcadiaGroup/fironeutrino/blockntfns"
+	"github.com/TheArcadiaGroup/fironeutrino/chainsync"
+	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
+	"github.com/TheArcadiaGroup/fironeutrino/headerlist"
+	"github.com/TheArcadiaGroup/fironeutrino/query"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
+	"github.com/TheArcadiaGroup/firoutil/gcs"
+	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 )
 
 const (
@@ -101,7 +101,7 @@ type blockManagerCfg struct {
 	BanPeer func(addr string, reason banman.Reason) error
 
 	// GetBlock fetches a block from the p2p network.
-	GetBlock func(chainhash.Hash, ...QueryOption) (*btcutil.Block, error)
+	GetBlock func(chainhash.Hash, ...QueryOption) (*firoutil.Block, error)
 
 	// firstPeerSignal is a channel that's sent upon once the main daemon
 	// has made its first peer connection. We use this to ensure we don't
@@ -1664,7 +1664,7 @@ func resolveFilterMismatchFromBlock(block *wire.MsgBlock,
 		// the inputs we can also derive most of the scripts of the
 		// outputs being spent (at least for standard scripts).
 		numOpReturns, err := VerifyBasicBlockFilter(
-			filter, btcutil.NewBlock(block),
+			filter, firoutil.NewBlock(block),
 		)
 		if err != nil {
 			// Mark peer bad if we cannot verify its filter.
@@ -2712,7 +2712,7 @@ func (b *blockManager) checkHeaderSanity(blockHeader *wire.BlockHeader,
 	if err != nil {
 		return err
 	}
-	stubBlock := btcutil.NewBlock(&wire.MsgBlock{
+	stubBlock := firoutil.NewBlock(&wire.MsgBlock{
 		Header: *blockHeader,
 	})
 	err = blockchain.CheckProofOfWork(stubBlock,

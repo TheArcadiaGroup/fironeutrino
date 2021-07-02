@@ -3,16 +3,16 @@ package neutrino
 import (
 	"fmt"
 
-	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcutil/gcs"
-	"github.com/btcsuite/btcutil/gcs/builder"
+	"github.com/TheArcadiaGroup/firod/txscript"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
+	"github.com/TheArcadiaGroup/firoutil/gcs"
+	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 )
 
 // VerifyBasicBlockFilter asserts that a given block filter was constructed
 // correctly and according to the rules of BIP-0158 to contain both the output's
 // pk scripts as well as the pk scripts the inputs are spending.
-func VerifyBasicBlockFilter(filter *gcs.Filter, block *btcutil.Block) (int,
+func VerifyBasicBlockFilter(filter *gcs.Filter, block *firoutil.Block) (int,
 	error) {
 
 	var (
@@ -97,15 +97,15 @@ func VerifyBasicBlockFilter(filter *gcs.Filter, block *btcutil.Block) (int,
 			//
 			// TODO(guggero): Add all those edge cases to
 			// ComputePkScript?
-			if len(in.Witness) == 0 {
-				continue
-			}
+			// if len(in.Witness) == 0 {
+			// 	continue
+			// }
 
 			// The only input type that has both set is a nested
 			// P2PKH (P2SH-P2WKH). We can verify that one because
 			// the script hash has to be HASH160(OP_PUSH32 <PKH>).
 			script, err := txscript.ComputePkScript(
-				in.SignatureScript, in.Witness,
+				in.SignatureScript,
 			)
 
 			// Just skip any inputs that we can't derive the pk

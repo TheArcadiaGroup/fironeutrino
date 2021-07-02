@@ -4,13 +4,13 @@ import (
 	"crypto/sha256"
 	"testing"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
-	"github.com/btcsuite/btcutil/gcs"
-	"github.com/btcsuite/btcutil/gcs/builder"
+	"github.com/TheArcadiaGroup/firod/btcec"
+	"github.com/TheArcadiaGroup/firod/chaincfg"
+	"github.com/TheArcadiaGroup/firod/txscript"
+	"github.com/TheArcadiaGroup/firod/wire"
+	"github.com/TheArcadiaGroup/firoutil"
+	"github.com/TheArcadiaGroup/firoutil/gcs"
+	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 	"github.com/stretchr/testify/require"
 )
 
@@ -118,7 +118,7 @@ func TestVerifyBlockFilter(t *testing.T) {
 	utxoSet := []*wire.MsgTx{prevTx}
 	validFilter := filterFromBlock(t, utxoSet, spendBlock, true)
 	invalidFilter := filterFromBlock(t, utxoSet, spendBlock, false)
-	b := btcutil.NewBlock(spendBlock)
+	b := firoutil.NewBlock(spendBlock)
 
 	opReturnValid, err := VerifyBasicBlockFilter(validFilter, b)
 	require.NoError(t, err)
@@ -223,9 +223,9 @@ func spendP2SH(t *testing.T, pubKey *btcec.PublicKey, prevTx *wire.MsgTx,
 func spendNP2WKH(t *testing.T, pubKey *btcec.PublicKey, prevTx *wire.MsgTx,
 	idx uint32) *wire.TxIn {
 
-	pkHash := btcutil.Hash160(pubKey.SerializeCompressed())
+	pkHash := firoutil.Hash160(pubKey.SerializeCompressed())
 
-	witAddr, err := btcutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
+	witAddr, err := firoutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
 	require.NoError(t, err)
 
 	witnessProgram, err := txscript.PayToAddrScript(witAddr)
@@ -270,7 +270,7 @@ func spendP2WSH(t *testing.T, pubKey *btcec.PublicKey, prevTx *wire.MsgTx,
 }
 
 func makeP2PK(t *testing.T, pubKey *btcec.PublicKey) []byte {
-	addr, err := btcutil.NewAddressPubKey(
+	addr, err := firoutil.NewAddressPubKey(
 		pubKey.SerializeCompressed(), chainParams,
 	)
 	require.NoError(t, err)
@@ -281,8 +281,8 @@ func makeP2PK(t *testing.T, pubKey *btcec.PublicKey) []byte {
 }
 
 func makeP2PKH(t *testing.T, pubKey *btcec.PublicKey) []byte {
-	pkHash := btcutil.Hash160(pubKey.SerializeCompressed())
-	addr, err := btcutil.NewAddressPubKeyHash(pkHash, chainParams)
+	pkHash := firoutil.Hash160(pubKey.SerializeCompressed())
+	addr, err := firoutil.NewAddressPubKeyHash(pkHash, chainParams)
 	require.NoError(t, err)
 
 	pkScript, err := txscript.PayToAddrScript(addr)
@@ -293,7 +293,7 @@ func makeP2PKH(t *testing.T, pubKey *btcec.PublicKey) []byte {
 func makeP2SH(t *testing.T, pubKey *btcec.PublicKey) []byte {
 	script := scriptP2PKH(t, pubKey)
 
-	addr, err := btcutil.NewAddressScriptHash(script, chainParams)
+	addr, err := firoutil.NewAddressScriptHash(script, chainParams)
 	require.NoError(t, err)
 
 	pkScript, err := txscript.PayToAddrScript(addr)
@@ -302,15 +302,15 @@ func makeP2SH(t *testing.T, pubKey *btcec.PublicKey) []byte {
 }
 
 func makeNP2WKH(t *testing.T, pubKey *btcec.PublicKey) []byte {
-	pkHash := btcutil.Hash160(pubKey.SerializeCompressed())
+	pkHash := firoutil.Hash160(pubKey.SerializeCompressed())
 
-	witAddr, err := btcutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
+	witAddr, err := firoutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
 	require.NoError(t, err)
 
 	witnessProgram, err := txscript.PayToAddrScript(witAddr)
 	require.NoError(t, err)
 
-	addr, err := btcutil.NewAddressScriptHash(witnessProgram, chainParams)
+	addr, err := firoutil.NewAddressScriptHash(witnessProgram, chainParams)
 	require.NoError(t, err)
 
 	pkScript, err := txscript.PayToAddrScript(addr)
@@ -319,9 +319,9 @@ func makeNP2WKH(t *testing.T, pubKey *btcec.PublicKey) []byte {
 }
 
 func makeP2WKH(t *testing.T, pubKey *btcec.PublicKey) []byte {
-	pkHash := btcutil.Hash160(pubKey.SerializeCompressed())
+	pkHash := firoutil.Hash160(pubKey.SerializeCompressed())
 
-	addr, err := btcutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
+	addr, err := firoutil.NewAddressWitnessPubKeyHash(pkHash, chainParams)
 	require.NoError(t, err)
 
 	pkScript, err := txscript.PayToAddrScript(addr)
@@ -333,7 +333,7 @@ func makeP2WSH(t *testing.T, pubKey *btcec.PublicKey) []byte {
 	witnessScript := scriptP2PKH(t, pubKey)
 	scriptHash := sha256.Sum256(witnessScript)
 
-	addr, err := btcutil.NewAddressWitnessScriptHash(
+	addr, err := firoutil.NewAddressWitnessScriptHash(
 		scriptHash[:], chainParams,
 	)
 	require.NoError(t, err)
