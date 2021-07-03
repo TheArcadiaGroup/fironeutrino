@@ -25,7 +25,7 @@ import (
 	neutrino "github.com/TheArcadiaGroup/fironeutrino"
 	"github.com/TheArcadiaGroup/fironeutrino/banman"
 	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
-	"github.com/TheArcadiaGroup/firoutil"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 	"github.com/TheArcadiaGroup/firowallet/wallet/txauthor"
 	"github.com/TheArcadiaGroup/firowallet/walletdb"

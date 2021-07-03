@@ -8,7 +8,7 @@ import (
 	"github.com/TheArcadiaGroup/firod/chaincfg"
 	"github.com/TheArcadiaGroup/firod/txscript"
 	"github.com/TheArcadiaGroup/firod/wire"
-	"github.com/TheArcadiaGroup/firoutil"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 	"github.com/TheArcadiaGroup/firoutil/gcs"
 	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 	"github.com/stretchr/testify/require"

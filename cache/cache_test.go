@@ -9,7 +9,7 @@ import (
 	"github.com/TheArcadiaGroup/fironeutrino/cache"
 	"github.com/TheArcadiaGroup/fironeutrino/cache/lru"
 	"github.com/TheArcadiaGroup/fironeutrino/filterdb"
-	"github.com/TheArcadiaGroup/firoutil"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 	"github.com/TheArcadiaGroup/firoutil/gcs"
 )
 

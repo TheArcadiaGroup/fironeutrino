@@ -15,7 +15,7 @@ import (
 	"github.com/TheArcadiaGroup/firod/wire"
 	"github.com/TheArcadiaGroup/fironeutrino/blockntfns"
 	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
-	"github.com/TheArcadiaGroup/firoutil"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 	"github.com/TheArcadiaGroup/firoutil/gcs"
 	"github.com/TheArcadiaGroup/firoutil/gcs/builder"
 	"github.com/davecgh/go-spew/spew"

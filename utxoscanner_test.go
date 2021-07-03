@@ -10,7 +10,7 @@ import (
 	"github.com/TheArcadiaGroup/firod/chaincfg/chainhash"
 	"github.com/TheArcadiaGroup/firod/wire"
 	"github.com/TheArcadiaGroup/fironeutrino/headerfs"
-	"github.com/TheArcadiaGroup/firoutil"
+	firoutil "github.com/TheArcadiaGroup/firoutil"
 	"github.com/TheArcadiaGroup/firoutil/gcs"
 )
 
